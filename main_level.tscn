@@ -5,4 +5,4 @@
 [node name="MainLevel" type="Node2D"]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_hbfcc")]
-position = Vector2(577, 319)
+position = Vector2(677, 348)
