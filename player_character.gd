@@ -22,22 +22,24 @@ func _physics_process(delta: float) -> void:
 func move() -> void:
 	var movement: Vector2 = Vector2.ZERO
 	var boost = 1
-	print(energy)
+#	print(energy)
 	if Input.is_action_pressed("move_left"): movement.x -= 1.0
 	if Input.is_action_pressed("move_right"): movement.x += 1.0
 	if Input.is_action_pressed("move_up"): movement.y -= 1.0
 	if Input.is_action_pressed("move_down"): movement.y += 1.0
 	if Input.is_action_pressed("boost"):
 		if energy > 0:
-			print("boosting...")
+#			print("boosting...")
 			boost = boost_multiplier
 			energy = clamp(energy - 1,0,max_energy)
 		else:
-			print("out of energy!")
+#			print("out of energy!")
+			pass
 	else:
-		print("Regenerating energy...")
+#		print("Regenerating energy...")
 		energy = clamp(energy + 1,0,max_energy)
-	velocity = movement * (MOVE_SPEED * speed_multiplier * boost)
+	velocity = movement.normalized() * (MOVE_SPEED * speed_multiplier * boost)
+	print(velocity)
 	move_and_slide()
 
 func shoot() -> void :
