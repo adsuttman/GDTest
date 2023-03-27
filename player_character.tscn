@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://pg1lbi145blb"]
+
+[ext_resource type="Texture2D" uid="uid://frxh5gxs7aoh" path="res://icon.svg" id="1_3gwoj"]
+[ext_resource type="Script" path="res://player_character.gd" id="1_rkf8i"]
+[ext_resource type="PackedScene" uid="uid://uve3qjkes3y3" path="res://projectile.tscn" id="2_2dnpm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aqtq7"]
+radius = 60.0
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+script = ExtResource("1_rkf8i")
+speed_multiplier = 1.5
+projectile = ExtResource("2_2dnpm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+shape = SubResource("CircleShape2D_aqtq7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+rotation = -1.5708
+texture = ExtResource("1_3gwoj")
+
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(109, 0)
