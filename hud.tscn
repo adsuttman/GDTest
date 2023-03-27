@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dma21v5dljqfb"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_xh8n8"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_xh8n8")
+
+[node name="EnergyBar" type="ProgressBar" parent="."]
+offset_right = 390.0
+offset_bottom = 27.0

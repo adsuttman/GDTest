@@ -39,7 +39,7 @@ func move() -> void:
 #		print("Regenerating energy...")
 		energy = clamp(energy + 1,0,max_energy)
 	velocity = movement.normalized() * (MOVE_SPEED * speed_multiplier * boost)
-	print(velocity)
+#	print(velocity)
 	move_and_slide()
 
 func shoot() -> void :
