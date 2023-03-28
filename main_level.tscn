@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd2knpryw30l"]
+[gd_scene load_steps=4 format=3 uid="uid://dd2knpryw30l"]
 
 [ext_resource type="PackedScene" uid="uid://pg1lbi145blb" path="res://player_character.tscn" id="1_hbfcc"]
 [ext_resource type="PackedScene" uid="uid://dma21v5dljqfb" path="res://hud.tscn" id="1_s7n4f"]
+[ext_resource type="PackedScene" uid="uid://cgd2mnewct0i1" path="res://enemy.tscn" id="3_vabmo"]
 
 [node name="MainLevel" type="Node2D"]
 
@@ -10,3 +11,7 @@ player = NodePath("../PlayerCharacter")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_hbfcc")]
 position = Vector2(677, 348)
+
+[node name="Enemy" parent="." instance=ExtResource("3_vabmo")]
+position = Vector2(117, 169)
+health = 100.0

@@ -44,5 +44,9 @@ func move() -> void:
 
 func shoot() -> void :
 	var inst: Projectile = projectile.instantiate()
+	inst.spawned_from = self
 	owner.add_child(inst)
 	inst.transform = projectile_spawn_point.global_transform
+
+func handle_hit() -> void :
+	print("ow")

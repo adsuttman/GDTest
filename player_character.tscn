@@ -7,21 +7,21 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_aqtq7"]
 radius = 60.0
 
-[node name="PlayerCharacter" type="CharacterBody2D"]
+[node name="PlayerCharacter" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_rkf8i")
 speed_multiplier = 1.5
 projectile = ExtResource("2_2dnpm")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = 1
-scale = Vector2(0.5, 0.5)
-shape = SubResource("CircleShape2D_aqtq7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 1)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_3gwoj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_aqtq7")
 
 [node name="ProjectileSpawnPoint" type="Marker2D" parent="."]
 position = Vector2(64, 0)
