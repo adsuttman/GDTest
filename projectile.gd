@@ -6,3 +6,7 @@ class_name Projectile
 
 func _physics_process(delta: float) -> void:
 	position += transform.x * speed
+
+
+func _on_timer_timeout():
+	queue_free()
