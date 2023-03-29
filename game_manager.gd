@@ -13,6 +13,7 @@ var player: PlayerCharacter
 var score: int = 0
 
 signal score_updated(score: int)
+signal new_wave(wave: int)
 
 func _ready():
 	var tree = get_tree()
@@ -54,6 +55,7 @@ func handle_next_wave() ->void:
 	wave += 1
 	enemies_remaining = calculate_enemies(wave)
 	spawn_timer.start()
+	new_wave.emit(wave)
 
 func handle_player_death() -> void:
 	spawn_timer.stop()
