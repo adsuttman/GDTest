@@ -1,21 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://dd2knpryw30l"]
+[gd_scene load_steps=3 format=3 uid="uid://dd2knpryw30l"]
 
 [ext_resource type="PackedScene" uid="uid://pg1lbi145blb" path="res://player_character.tscn" id="1_hbfcc"]
 [ext_resource type="PackedScene" uid="uid://dma21v5dljqfb" path="res://hud.tscn" id="1_s7n4f"]
-[ext_resource type="PackedScene" uid="uid://cgd2mnewct0i1" path="res://enemy.tscn" id="3_vabmo"]
 
-[node name="Game" type="Node2D"]
+[node name="MainLevel" type="Node2D" groups=["Level"]]
 
 [node name="HUD" parent="." instance=ExtResource("1_s7n4f")]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_hbfcc")]
 position = Vector2(677, 348)
 
-[node name="Enemy" parent="." instance=ExtResource("3_vabmo")]
-position = Vector2(117, 169)
+[node name="SpawnPoint" type="Node2D" parent="." groups=["SpawnPoint"]]
+position = Vector2(-110, -103)
+rotation = 1.54618
 
-[node name="Enemy2" parent="." instance=ExtResource("3_vabmo")]
-position = Vector2(1103, 158)
+[node name="SpawnPoint2" type="Node2D" parent="." groups=["SpawnPoint"]]
+position = Vector2(1403, -98)
+rotation = 1.54618
+
+[node name="SpawnPoint3" type="Node2D" parent="." groups=["SpawnPoint"]]
+position = Vector2(1372, 827)
+rotation = 1.54618
+
+[node name="SpawnPoint4" type="Node2D" parent="." groups=["SpawnPoint"]]
+position = Vector2(-136, 820)
+rotation = 1.54618
 
 [connection signal="energy_changed" from="PlayerCharacter" to="HUD" method="_on_player_character_energy_changed"]
 [connection signal="player_death" from="PlayerCharacter" to="HUD" method="_on_player_character_player_death"]
