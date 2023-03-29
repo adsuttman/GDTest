@@ -11,6 +11,7 @@ var spawn_timer: Timer
 var time_between_spawns: float = 1.0
 var player: PlayerCharacter
 var score: int = 0
+var last_spawn_index = 0
 
 signal score_updated(score: int)
 signal new_wave(wave: int)
@@ -32,8 +33,13 @@ func initialize_spawn_timer() -> void:
 	spawn_timer.timeout.connect(spawn_enemy)
 
 func spawn_enemy() -> void:
-	var random_spawn: Node2D = \
-		spawn_points[randi_range(0, spawn_points.size() - 1)] as Node2D
+	var random_spawn: Node2D
+	while (true):
+		var index: int = randi_range(0, spawn_points.size() - 1)
+		if index != last_spawn_index:
+			random_spawn = spawn_points[index] as Node2D
+			last_spawn_index = index
+			break
 #	print(random_spawn)
 	var inst: Enemy = enemy_scene.instantiate()
 	inst.global_position = random_spawn.global_position
