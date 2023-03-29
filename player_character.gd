@@ -21,7 +21,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	move()
 	look_at(get_global_mouse_position())
-	if Input.is_action_just_pressed("shoot"): shoot()
+	if Input.is_action_just_pressed("shoot") and energy > 0: shoot()
 
 func move() -> void:
 	var movement: Vector2 = Vector2.ZERO
@@ -51,6 +51,7 @@ func shoot() -> void :
 	inst.spawned_from = self
 	owner.add_child(inst)
 	inst.transform = projectile_spawn_point.global_transform
+	energy -= 15
 
 func set_energy(value: int) -> void:
 	if value > max_energy:
