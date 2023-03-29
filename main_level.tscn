@@ -8,22 +8,21 @@
 [node name="HUD" parent="." instance=ExtResource("1_s7n4f")]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_hbfcc")]
-position = Vector2(677, 348)
+position = Vector2(640, 360)
 
 [node name="SpawnPoint" type="Node2D" parent="." groups=["SpawnPoint"]]
-position = Vector2(-110, -103)
 rotation = 1.54618
 
 [node name="SpawnPoint2" type="Node2D" parent="." groups=["SpawnPoint"]]
-position = Vector2(1403, -98)
+position = Vector2(1280, 0)
 rotation = 1.54618
 
 [node name="SpawnPoint3" type="Node2D" parent="." groups=["SpawnPoint"]]
-position = Vector2(1372, 827)
+position = Vector2(1280, 720)
 rotation = 1.54618
 
 [node name="SpawnPoint4" type="Node2D" parent="." groups=["SpawnPoint"]]
-position = Vector2(-136, 820)
+position = Vector2(0, 720)
 rotation = 1.54618
 
 [connection signal="energy_changed" from="PlayerCharacter" to="HUD" method="_on_player_character_energy_changed"]
