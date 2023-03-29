@@ -6,10 +6,12 @@ class_name Enemy
 @export var speed: float = 400
 var target: PlayerCharacter = null
 
-func _physics_process(delta) -> void:
-	var collision = get_last_slide_collision()
+func _ready():
 	if target == null:
 		target = get_tree().get_nodes_in_group("Player")[0]
+
+func _physics_process(delta) -> void:
+	var collision = get_last_slide_collision()
 	if collision != null:
 		handle_collision(collision as KinematicCollision2D)
 	if target != null:

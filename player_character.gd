@@ -11,6 +11,7 @@ const MOVE_SPEED: float = 500
 var energy: int
 
 signal energy_changed(value: int)
+signal player_death()
 
 func _ready() -> void:
 	set_energy(max_energy)
@@ -59,4 +60,5 @@ func set_energy(value: int) -> void:
 		energy_changed.emit(value)
 
 func handle_hit() -> void :
-	print("ow")
+	queue_free()
+	player_death.emit()
