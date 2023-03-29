@@ -14,4 +14,3 @@ position = Vector2(677, 348)
 
 [node name="Enemy" parent="." instance=ExtResource("3_vabmo")]
 position = Vector2(117, 169)
-health = 100.0

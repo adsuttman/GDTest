@@ -13,7 +13,6 @@ speed_multiplier = 1.5
 projectile = ExtResource("2_2dnpm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_3gwoj")
