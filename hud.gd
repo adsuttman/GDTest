@@ -3,6 +3,7 @@ extends CanvasLayer
 var energy_bar: ProgressBar
 var score_counter: Label
 var wave_notification: Label
+var wave: int = 1
 
 func _ready():
 	energy_bar = $EnergyBar
@@ -23,13 +24,19 @@ func _on_player_character_energy_changed(value):
 
 
 func _on_player_character_player_death():
+	var death_message: Label = $DeathMessage
 	energy_bar.hide()
-	$DeathMessage.show()
+	score_counter.hide()
+	
+	$DeathMessage/Report.text = "You survived until wave " + str(wave)\
+		+ " with a final score of " + score_counter.text
+	death_message.show()
 
 func update_score(score: int) -> void:
 	score_counter.text = str(score)
 
 func on_new_wave(wave: int) -> void:
+	self.wave = wave
 	wave_notification.text = "Wave " + str(wave)
 	wave_notification.show()
 	await get_tree().create_timer(1.0).timeout
