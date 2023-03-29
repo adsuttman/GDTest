@@ -16,3 +16,4 @@ position = Vector2(117, 169)
 
 [connection signal="energy_changed" from="PlayerCharacter" to="HUD" method="_on_player_character_energy_changed"]
 [connection signal="player_death" from="PlayerCharacter" to="HUD" method="_on_player_character_player_death"]
+[connection signal="player_death" from="PlayerCharacter" to="Enemy" method="_on_player_character_player_death"]

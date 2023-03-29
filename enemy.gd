@@ -5,6 +5,7 @@ class_name Enemy
 @export var health: float = 100.0
 @export var speed: float = 400
 var target: PlayerCharacter = null
+var victory_dance = false
 
 func _ready():
 	if target == null:
@@ -18,6 +19,8 @@ func _physics_process(delta) -> void:
 		look_at(target.global_position)
 		velocity = position.direction_to(target.position) * speed
 		move_and_slide()
+	if victory_dance:
+		rotate(PI/24)
 
 func apply_damage(damage: float) -> void:
 	health -= damage
@@ -28,3 +31,7 @@ func handle_collision(collision: KinematicCollision2D) -> void:
 	var object = collision.get_collider()
 	if object is PlayerCharacter:
 		object.handle_hit()
+
+
+func _on_player_character_player_death():
+	victory_dance = true
