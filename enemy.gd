@@ -10,6 +10,7 @@ var victory_dance = false
 func _ready():
 	if target == null:
 		target = get_tree().get_nodes_in_group("Player")[0]
+		target.player_death.connect(on_player_death)
 
 func _physics_process(delta) -> void:
 	var collision = get_last_slide_collision()
@@ -33,5 +34,6 @@ func handle_collision(collision: KinematicCollision2D) -> void:
 		object.handle_hit()
 
 
-func _on_player_character_player_death():
+func on_player_death():
 	victory_dance = true
+
