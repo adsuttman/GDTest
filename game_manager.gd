@@ -10,6 +10,9 @@ var level: Node2D
 var spawn_timer: Timer
 var time_between_spawns: float = 1.0
 var player: PlayerCharacter
+var score: int = 0
+
+signal score_updated(score: int)
 
 func _ready():
 	var tree = get_tree()
@@ -30,10 +33,18 @@ func initialize_spawn_timer() -> void:
 func spawn_enemy() -> void:
 	var random_spawn: Node2D = \
 		spawn_points[randi_range(0, spawn_points.size() - 1)] as Node2D
-	print(random_spawn)
-	var inst = enemy_scene.instantiate()
+#	print(random_spawn)
+	var inst: Enemy = enemy_scene.instantiate()
 	inst.global_position = random_spawn.global_position
 	level.add_child(inst)
+	inst.enemy_death.connect(handle_enemy_death)
+
+func increase_score() -> void:
+	score += 1
+	score_updated.emit(score)
 
 func handle_player_death() -> void:
 	spawn_timer.stop()
+
+func handle_enemy_death() -> void:
+	increase_score()

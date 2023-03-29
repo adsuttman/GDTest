@@ -7,6 +7,8 @@ class_name Enemy
 var target: PlayerCharacter = null
 var victory_dance = false
 
+signal enemy_death
+
 func _ready():
 	if target == null:
 		target = get_tree().get_nodes_in_group("Player")[0]
@@ -26,6 +28,7 @@ func _physics_process(delta) -> void:
 func apply_damage(damage: float) -> void:
 	health -= damage
 	if health <= 0:
+		enemy_death.emit()
 		queue_free()
 
 func handle_collision(collision: KinematicCollision2D) -> void:
