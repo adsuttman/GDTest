@@ -8,9 +8,12 @@ class_name PlayerCharacter
 @export var boost_multiplier: float = 1.5
 @export var max_energy: int = 100
 const MOVE_SPEED: float = 500
-var energy: int = max_energy
+var energy: int
+
+signal energy_changed(value: int)
 
 func _ready() -> void:
+	set_energy(max_energy)
 	projectile_spawn_point = $ProjectileSpawnPoint
 
 
@@ -31,13 +34,13 @@ func move() -> void:
 		if energy > 0:
 #			print("boosting...")
 			boost = boost_multiplier
-			energy = clamp(energy - 1,0,max_energy)
+			set_energy(energy - 1)
 		else:
 #			print("out of energy!")
 			pass
 	else:
 #		print("Regenerating energy...")
-		energy = clamp(energy + 1,0,max_energy)
+		set_energy(energy + 1)
 	velocity = movement.normalized() * (MOVE_SPEED * speed_multiplier * boost)
 #	print(velocity)
 	move_and_slide()
@@ -47,6 +50,13 @@ func shoot() -> void :
 	inst.spawned_from = self
 	owner.add_child(inst)
 	inst.transform = projectile_spawn_point.global_transform
+
+func set_energy(value: int) -> void:
+	if value > max_energy:
+		pass
+	else:
+		energy = value
+		energy_changed.emit(value)
 
 func handle_hit() -> void :
 	print("ow")

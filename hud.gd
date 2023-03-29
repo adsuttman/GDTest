@@ -1,13 +1,17 @@
 extends CanvasLayer
 
-@export var player: PlayerCharacter
 var energy_bar: ProgressBar
 
 func _ready():
 	energy_bar = $EnergyBar
-	energy_bar.set_max(player.max_energy)
-	energy_bar.set_value(player.energy)
 	show()
 
 func _process(delta):
-	energy_bar.set_value(player.energy)
+	pass
+
+func update_energy_bar(value: int) -> void:
+	energy_bar.set_value(value)
+
+
+func _on_player_character_energy_changed(value):
+	update_energy_bar(value)

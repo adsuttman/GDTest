@@ -4,13 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dma21v5dljqfb" path="res://hud.tscn" id="1_s7n4f"]
 [ext_resource type="PackedScene" uid="uid://cgd2mnewct0i1" path="res://enemy.tscn" id="3_vabmo"]
 
-[node name="MainLevel" type="Node2D"]
+[node name="Game" type="Node2D"]
 
-[node name="HUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_s7n4f")]
-player = NodePath("../PlayerCharacter")
+[node name="HUD" parent="." instance=ExtResource("1_s7n4f")]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_hbfcc")]
 position = Vector2(677, 348)
 
 [node name="Enemy" parent="." instance=ExtResource("3_vabmo")]
 position = Vector2(117, 169)
+
+[connection signal="energy_changed" from="PlayerCharacter" to="HUD" method="_on_player_character_energy_changed"]
