@@ -38,5 +38,6 @@ func handle_collision(collision: KinematicCollision2D) -> void:
 
 
 func on_player_death():
+	target = null
 	victory_dance = true
 

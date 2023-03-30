@@ -61,5 +61,9 @@ func set_energy(value: int) -> void:
 		energy_changed.emit(value)
 
 func handle_hit() -> void :
-	queue_free()
 	player_death.emit()
+	$DeathParticles.emitting = true
+	$Sprite2D.visible = false
+	$CollisionShape2D.disabled = true
+	await get_tree().create_timer(3.0).timeout
+	queue_free()
