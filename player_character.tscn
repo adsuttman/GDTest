@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://pg1lbi145blb"]
+[gd_scene load_steps=17 format=3 uid="uid://pg1lbi145blb"]
 
 [ext_resource type="Texture2D" uid="uid://frxh5gxs7aoh" path="res://icon.svg" id="1_3gwoj"]
 [ext_resource type="Script" path="res://player_character.gd" id="1_rkf8i"]
 [ext_resource type="PackedScene" uid="uid://uve3qjkes3y3" path="res://projectile.tscn" id="2_2dnpm"]
+[ext_resource type="PackedScene" uid="uid://46ltsif4ahnl" path="res://shoot_particles.tscn" id="3_hwuyc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aqtq7"]
 radius = 60.0
@@ -80,6 +81,7 @@ turbulence_influence_over_life = SubResource("CurveTexture_hgh8t")
 script = ExtResource("1_rkf8i")
 speed_multiplier = 1.5
 projectile = ExtResource("2_2dnpm")
+shoot_effect = ExtResource("3_hwuyc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5708

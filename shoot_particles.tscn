@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://46ltsif4ahnl"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_26jx2"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_min = 200.0
+radial_accel_max = 300.0
+angle_min = -60.0
+angle_max = 60.0
+scale_min = 2.0
+scale_max = 3.0
+color = Color(0.913725, 0.913725, 0, 1)
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+
+[node name="ShootParticles" type="GPUParticles2D"]
+position = Vector2(64, 0)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_26jx2")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0

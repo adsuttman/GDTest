@@ -7,6 +7,7 @@ class_name PlayerCharacter
 @export var projectile_spawn_point: Marker2D
 @export var boost_multiplier: float = 1.5
 @export var max_energy: int = 100
+@export var shoot_effect: PackedScene
 const MOVE_SPEED: float = 500
 var energy: int
 
@@ -51,6 +52,9 @@ func shoot() -> void :
 	inst.spawned_from = self
 	owner.add_child(inst)
 	inst.transform = projectile_spawn_point.global_transform
+	var effect: GPUParticles2D = shoot_effect.instantiate()
+	effect.transform = projectile_spawn_point.global_transform
+	owner.add_child(effect)
 	energy -= 15
 
 func set_energy(value: int) -> void:
