@@ -61,7 +61,7 @@ func shoot() -> void :
 
 func set_energy(value: int) -> void:
 	if value > max_energy:
-		pass
+		energy = max_energy
 	else:
 		energy = value
 		energy_changed.emit(value)
