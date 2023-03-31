@@ -10,6 +10,7 @@ class_name PlayerCharacter
 @export var shoot_effect: PackedScene
 const MOVE_SPEED: float = 500
 var energy: int
+var dead = false
 
 signal energy_changed(value: int)
 signal player_death()
@@ -20,9 +21,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	move()
-	look_at(get_global_mouse_position())
-	if Input.is_action_just_pressed("shoot") and energy > 0: shoot()
+	if !dead:
+		move()
+		look_at(get_global_mouse_position())
+		if Input.is_action_just_pressed("shoot") and energy > 0: shoot()
 
 func move() -> void:
 	var movement: Vector2 = Vector2.ZERO
@@ -69,5 +71,6 @@ func handle_hit() -> void :
 	$DeathParticles.emitting = true
 	$Sprite2D.visible = false
 	$CollisionShape2D.disabled = true
+	dead = true
 	await get_tree().create_timer(3.0).timeout
 	queue_free()
