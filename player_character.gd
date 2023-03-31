@@ -57,7 +57,7 @@ func shoot() -> void :
 	var effect: GPUParticles2D = shoot_effect.instantiate()
 	effect.transform = projectile_spawn_point.global_transform
 	owner.add_child(effect)
-	energy -= 15
+	set_energy(energy - 15)
 
 func set_energy(value: int) -> void:
 	if value > max_energy:
