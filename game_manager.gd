@@ -22,6 +22,7 @@ func _ready():
 	var tree = get_tree()
 	level = tree.get_first_node_in_group("Level")
 	spawn_points = tree.get_nodes_in_group("SpawnPoint")
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	start()
 
 
@@ -38,6 +39,7 @@ func initialize_spawn_timer() -> void:
 	spawn_timer = Timer.new()
 	spawn_timer.wait_time = time_between_spawns
 	spawn_timer.autostart = true
+	spawn_timer.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(spawn_enemy)
 
@@ -69,6 +71,8 @@ func _process(delta):
 			restart()
 		else:
 			restart_counter -= 1
+	if Input.is_action_just_pressed("pause"):
+		get_tree().paused = !get_tree().paused
 
 func spawn_enemy() -> void:
 	var random_spawn: Node2D
