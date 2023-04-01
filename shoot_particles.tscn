@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://46ltsif4ahnl"]
+[gd_scene load_steps=3 format=3 uid="uid://46ltsif4ahnl"]
+
+[ext_resource type="Script" path="res://shoot_particles.gd" id="1_jx7ef"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_26jx2"]
 particle_flag_disable_z = true
@@ -25,3 +27,8 @@ one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
 randomness = 1.0
+script = ExtResource("1_jx7ef")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
