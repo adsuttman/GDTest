@@ -8,6 +8,7 @@ class_name PlayerCharacter
 @export var boost_multiplier: float = 2.0
 @export var max_energy: int = 100
 @export var shoot_effect: PackedScene
+@onready var level = get_tree().get_first_node_in_group("Level")
 var acceleration = 1500
 var friction = 1000
 const MOVE_SPEED: float = 500
@@ -41,7 +42,7 @@ func move(delta) -> void:
 			velocity = velocity.limit_length(max_speed)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	print(velocity)
+#	print(velocity)
 	move_and_slide()
 
 #func move() -> void:
@@ -70,11 +71,11 @@ func move(delta) -> void:
 func shoot() -> void :
 	var inst: Projectile = projectile.instantiate()
 	inst.spawned_from = self
-	owner.add_child(inst)
+	level.add_child(inst)
 	inst.transform = projectile_spawn_point.global_transform
 	var effect: GPUParticles2D = shoot_effect.instantiate()
 	effect.transform = projectile_spawn_point.global_transform
-	owner.add_child(effect)
+	level.add_child(effect)
 	set_energy(energy - 15)
 
 func set_energy(value: int) -> void:

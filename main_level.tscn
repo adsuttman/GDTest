@@ -1,14 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd2knpryw30l"]
+[gd_scene load_steps=2 format=3 uid="uid://dd2knpryw30l"]
 
-[ext_resource type="PackedScene" uid="uid://pg1lbi145blb" path="res://player_character.tscn" id="1_hbfcc"]
 [ext_resource type="PackedScene" uid="uid://dma21v5dljqfb" path="res://hud.tscn" id="1_s7n4f"]
 
 [node name="MainLevel" type="Node2D" groups=["Level"]]
 
 [node name="HUD" parent="." instance=ExtResource("1_s7n4f")]
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_hbfcc")]
-position = Vector2(640, 360)
 
 [node name="SpawnPoint" type="Node2D" parent="." groups=["SpawnPoint"]]
 rotation = 1.54618
@@ -24,6 +20,3 @@ rotation = 1.54618
 [node name="SpawnPoint4" type="Node2D" parent="." groups=["SpawnPoint"]]
 position = Vector2(0, 720)
 rotation = 1.54618
-
-[connection signal="energy_changed" from="PlayerCharacter" to="HUD" method="_on_player_character_energy_changed"]
-[connection signal="player_death" from="PlayerCharacter" to="HUD" method="_on_player_character_player_death"]

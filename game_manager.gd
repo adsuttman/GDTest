@@ -1,36 +1,74 @@
 extends Node
 
 @onready var enemy_scene: PackedScene = load("res://enemy.tscn")
-#@onready var player_scene: PackedScene = load("res://player_character.tscn")
-var wave: int = 1
-var enemies_remaining: int = calculate_enemies(wave)
-var spawn_count: int = 0
+@onready var player_scene: PackedScene = load("res://player_character.tscn")
+var wave: int
+var enemies_remaining: int
+var spawn_count: int
 var spawn_points: Array = []
 var level: Node2D
 var spawn_timer: Timer
 var time_between_spawns: float = 1.0
 var player: PlayerCharacter
-var score: int = 0
+var score: int
 var last_spawn_index = 0
+var restart_counter = 60
 
 signal score_updated(score: int)
 signal new_wave(wave: int)
+signal restarted(new_player: PlayerCharacter)
 
 func _ready():
 	var tree = get_tree()
 	level = tree.get_first_node_in_group("Level")
 	spawn_points = tree.get_nodes_in_group("SpawnPoint")
-	player = tree.get_first_node_in_group("Player")
-	initialize_spawn_timer()
+	start()
+
+
+func instantiate_player():
+	player = player_scene.instantiate()
 	player.player_death.connect(handle_player_death)
-	
+	player.position.x = 640
+	player.position.y = 360
+	level.add_child(player)
 
 func initialize_spawn_timer() -> void:
+	if spawn_timer != null:
+		spawn_timer.queue_free()
 	spawn_timer = Timer.new()
 	spawn_timer.wait_time = time_between_spawns
 	spawn_timer.autostart = true
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(spawn_enemy)
+
+func start():
+	instantiate_player()
+	wave = 1
+	spawn_count = 0
+	score = 0
+	enemies_remaining = calculate_enemies(wave)
+#	score_updated.emit(score)
+#	new_wave.emit(wave)
+	initialize_spawn_timer()
+
+func restart():
+	restart_counter = 60
+	var tree = get_tree()
+	for enemy in tree.get_nodes_in_group("Enemy"):
+		enemy.queue_free()
+	for projectile in tree.get_nodes_in_group("Projectile"):
+		projectile.queue_free()
+	if player != null:
+		player.queue_free()
+	start()
+	restarted.emit(player)
+
+func _process(delta):
+	if Input.is_action_pressed("restart"):
+		if restart_counter == 0:
+			restart()
+		else:
+			restart_counter -= 1
 
 func spawn_enemy() -> void:
 	var random_spawn: Node2D
